@@ -57,4 +57,19 @@ public class DataHandling {
             return false;  // El registro no fue encontrado
         }
     }
+
+    boolean updateRegistro(DatosNuevaZelanda updatedRegistro) {
+        JSONReader reader = new JSONReader();
+        ArrayList<DatosNuevaZelanda> registros = reader.readDatosGenerales("./src/main/resources/cp-national-datafile.json");
+
+        for (int i = 0; i < registros.size(); i++) {
+            DatosNuevaZelanda registro = registros.get(i);
+            if (registro.getId().equals(updatedRegistro.getId())) {
+                registros.set(i, updatedRegistro);
+                break;  // Sale del bucle después de actualizar el primer registro coincidente
+            }
+        }
+
+        return reader.writeJsonDatosGenerales("./src/main/resources/cp-national-datafile.json", registros);
+    }
 }

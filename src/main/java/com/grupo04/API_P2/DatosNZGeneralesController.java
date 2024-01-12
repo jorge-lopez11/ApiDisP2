@@ -32,4 +32,20 @@ public class DatosNZGeneralesController {
         }
     }
 
+    @PutMapping("/datosGenerales/{id}")
+    public ResponseEntity<String> updateRegistro(@PathVariable String id, @RequestBody DatosNuevaZelanda updatedRegistro) {
+        DataHandling dataHandling = new DataHandling();
+
+        // Asignar el ID proporcionado al registro actualizado
+        updatedRegistro.setId(id);
+
+        boolean success = dataHandling.updateRegistro(updatedRegistro);
+
+        if (success) {
+            return ResponseEntity.ok("Registro actualizado correctamente");
+        } else {
+            return ResponseEntity.status(500).body("Error al actualizar el registro");
+        }
+    }
+
 }
