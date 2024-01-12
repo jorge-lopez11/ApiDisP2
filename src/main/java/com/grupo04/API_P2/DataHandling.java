@@ -72,4 +72,16 @@ public class DataHandling {
 
         return reader.writeJsonDatosGenerales("./src/main/resources/cp-national-datafile.json", registros);
     }
+
+    boolean addRegistro(DatosNuevaZelanda nuevoRegistro) {
+        JSONReader reader = new JSONReader();
+        ArrayList<DatosNuevaZelanda> registros = reader.readDatosGenerales("./src/main/resources/cp-national-datafile.json");
+
+        // Asignar un nuevo ID al registro antes de agregarlo
+        nuevoRegistro.setId(UUID.randomUUID().toString());
+
+        registros.add(nuevoRegistro);
+
+        return reader.writeJsonDatosGenerales("./src/main/resources/cp-national-datafile.json", registros);
+    }
 }

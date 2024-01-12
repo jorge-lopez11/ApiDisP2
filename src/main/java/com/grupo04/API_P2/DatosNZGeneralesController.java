@@ -1,6 +1,7 @@
 package com.grupo04.API_P2;
 
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 
@@ -45,6 +46,22 @@ public class DatosNZGeneralesController {
             return ResponseEntity.ok("Registro actualizado correctamente");
         } else {
             return ResponseEntity.status(500).body("Error al actualizar el registro");
+        }
+    }
+
+    @PostMapping("/datosGenerales")
+    public ResponseEntity<String> createRegistro(@RequestBody DatosNuevaZelanda nuevoRegistro) {
+        DataHandling dataHandling = new DataHandling();
+
+        // Asignar un nuevo ID al registro antes de guardarlo
+        nuevoRegistro.setId( UUID.randomUUID().toString());
+
+        boolean success = dataHandling.addRegistro(nuevoRegistro);
+
+        if (success) {
+            return ResponseEntity.ok("Registro creado correctamente");
+        } else {
+            return ResponseEntity.status(500).body("Error al crear el registro");
         }
     }
 
