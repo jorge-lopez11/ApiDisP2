@@ -3,7 +3,7 @@ package com.grupo04.API_P2;
 import java.util.UUID;
 
 public class DatosNuevaZelanda {
-    UUID Id;
+    String ID;
     String MsCode;
     String Year;
     String EstCode;
@@ -13,11 +13,11 @@ public class DatosNuevaZelanda {
     String UpperCIB;
     String Flag;
 
-    public UUID getId() {
-        return Id;
+    public String getId() {
+        return ID;
     }
 
-    public void setId(UUID id) {Id = id;}
+    public void setId(String id) {ID = id;}
 
     public String getMsCode(){
         return MsCode;
@@ -91,7 +91,7 @@ public class DatosNuevaZelanda {
     @Override
     public String toString() {
         return "Registro: {" +
-                "Id=" + Id +
+                "Id=" + ID +
                 ", MsCode='" + MsCode + '\'' +
                 ", Year='" + Year + '\'' +
                 ", EstCode='" + EstCode + '\'' +
