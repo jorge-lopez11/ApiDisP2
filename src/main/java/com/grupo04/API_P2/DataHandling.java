@@ -37,4 +37,24 @@ public class DataHandling {
         }
         return registroEncontrado;
     }
+
+    boolean deleteRegistro(String id) {
+        JSONReader reader = new JSONReader();
+        ArrayList<DatosNuevaZelanda> registros = reader.readDatosGenerales("./src/main/resources/cp-national-datafile.json");
+
+        boolean registroEncontrado = false;
+
+        for (DatosNuevaZelanda registro : registros) {
+            if (registro.getId().equals(id)) {
+                registros.remove(registro);
+                registroEncontrado = true;
+                break;  // Sale del bucle después de eliminar el primer registro coincidente
+            }
+        }
+        if (registroEncontrado) {
+            return reader.writeJsonDatosGenerales("./src/main/resources/cp-national-datafile.json", registros);
+        } else {
+            return false;  // El registro no fue encontrado
+        }
+    }
 }

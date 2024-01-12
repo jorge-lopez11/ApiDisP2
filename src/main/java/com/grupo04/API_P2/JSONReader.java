@@ -56,5 +56,17 @@ public class JSONReader {
         }
 
     }
+    public boolean writeJsonDatosGenerales(String fichero, ArrayList<DatosNuevaZelanda> datos){
+        try{
+            Writer writer = Files.newBufferedWriter(Paths.get(fichero));
+            writer.write(new Gson().toJson(datos));
+            writer.close();
+            return true;
+        } catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
 
 }
+

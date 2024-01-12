@@ -20,4 +20,16 @@ public class DatosNZGeneralesController {
         return datosGenerales;
     }
 
+    @DeleteMapping("/datosGenerales/{id}")
+    public ResponseEntity<String> deleteRegistro(@PathVariable String id) {
+        DataHandling dataHandling = new DataHandling();
+        boolean success = dataHandling.deleteRegistro(id);
+
+        if (success) {
+            return ResponseEntity.ok("Registro eliminado correctamente");
+        } else {
+            return ResponseEntity.status(500).body("Error al eliminar el registro");
+        }
+    }
+
 }
