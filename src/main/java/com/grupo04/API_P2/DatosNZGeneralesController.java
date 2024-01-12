@@ -1,6 +1,7 @@
 package com.grupo04.API_P2;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -62,6 +63,19 @@ public class DatosNZGeneralesController {
             return ResponseEntity.ok("Registro creado correctamente");
         } else {
             return ResponseEntity.status(500).body("Error al crear el registro");
+        }
+    }
+
+    @GetMapping("/msCodes")
+    public ResponseEntity<List<String>> getMsCodes() {
+        DataHandling dataHandling = new DataHandling();
+
+        List<String> msCodes = dataHandling.getMsCodes();
+
+        if (!msCodes.isEmpty()) {
+            return ResponseEntity.ok(msCodes);
+        } else {
+            return ResponseEntity.status(404).body(null);  // No se encontraron MsCodes
         }
     }
 

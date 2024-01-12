@@ -1,7 +1,10 @@
 package com.grupo04.API_P2;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class DataHandling {
     User getUserInfo (String name){
@@ -83,5 +86,21 @@ public class DataHandling {
         registros.add(nuevoRegistro);
 
         return reader.writeJsonDatosGenerales("./src/main/resources/cp-national-datafile.json", registros);
+    }
+
+    List<String> getMsCodes() {
+        JSONReader reader = new JSONReader();
+        ArrayList<DatosNuevaZelanda> registros = reader.readDatosGenerales("src/main/resources/cp-national-datafile.json");
+
+        List<String> distinctMsCodes = new ArrayList<>();
+
+        for (DatosNuevaZelanda registro : registros) {
+            String msCode = registro.getMsCode();
+            if (!distinctMsCodes.contains(msCode)) {
+                distinctMsCodes.add(msCode);
+            }
+        }
+
+        return distinctMsCodes;
     }
 }
