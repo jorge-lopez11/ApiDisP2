@@ -21,6 +21,12 @@ public class DatosNZGeneralesController {
         ArrayList<DatosNuevaZelanda> datosGenerales = reader.readDatosGenerales("src/main/resources/cp-national-datafile.json");
         return datosGenerales;
     }
+    @GetMapping("/datosGenerales/{id}")
+    public ResponseEntity<DatosNuevaZelanda> getById(@PathVariable String id){
+        DataHandling dataHandling = new DataHandling();
+        DatosNuevaZelanda registro = dataHandling.getRegistro(id);
+        return new ResponseEntity<>(registro, HttpStatus.OK);
+    }
 
     @DeleteMapping("/datosGenerales/{id}")
     public ResponseEntity<String> deleteRegistro(@PathVariable String id) {

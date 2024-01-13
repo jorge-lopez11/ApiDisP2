@@ -28,7 +28,7 @@ public class DataHandling {
         return userList;
     }
 
-    DatosNuevaZelanda getRegistro (UUID id){
+    DatosNuevaZelanda getRegistro (String id){
         DatosNuevaZelanda registroEncontrado = null;
         JSONReader reader = new JSONReader();
 
