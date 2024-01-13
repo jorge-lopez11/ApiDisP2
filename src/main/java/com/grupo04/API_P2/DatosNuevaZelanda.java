@@ -77,7 +77,8 @@ public class DatosNuevaZelanda {
         this.UpperCIB = null;
         this.Flag = null;
     }
-    public DatosNuevaZelanda(String MsCode, String Year, String EstCode, String Estimate, String SE, String LowerCIB, String UpperCIB, String Flag){
+    public DatosNuevaZelanda(String id, String MsCode, String Year, String EstCode, String Estimate, String SE, String LowerCIB, String UpperCIB, String Flag){
+        this.ID = id;
         this.MsCode = MsCode;
         this.Year = Year;
         this.EstCode = EstCode;

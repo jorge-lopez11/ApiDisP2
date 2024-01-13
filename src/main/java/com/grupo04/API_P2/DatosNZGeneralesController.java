@@ -66,7 +66,7 @@ public class DatosNZGeneralesController {
         boolean success = dataHandling.addRegistro(nuevoRegistro);
 
         if (success) {
-            return ResponseEntity.ok("Registro creado correctamente");
+            return ResponseEntity.ok(nuevoRegistro.ID);
         } else {
             return ResponseEntity.status(500).body("Error al crear el registro");
         }
