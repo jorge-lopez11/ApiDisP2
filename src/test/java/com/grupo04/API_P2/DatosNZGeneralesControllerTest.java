@@ -93,6 +93,64 @@ public class DatosNZGeneralesControllerTest {
         assertEquals(nuevoRegistro.getYear(), responseGet.getBody().getYear());
     }
 
+    @Test
+    public void updateRegistro(){
+        DatosNuevaZelanda nuevoRegistro = new DatosNuevaZelanda();
+        nuevoRegistro.MsCode = "MEASA";
+        nuevoRegistro.Year = "2023";
+        nuevoRegistro.EstCode = "_Proportion";
+        nuevoRegistro.Estimate = "99999999";
+        nuevoRegistro.Flag = "Hola Jorge";
+        nuevoRegistro.SE = "99";
+        nuevoRegistro.LowerCIB = "3.3";
+        nuevoRegistro.UpperCIB = "10.0";
+        nuevoRegistro.ID = "c53b1dc6-58a1-4d2f-aa64-7d87828746a4";
 
+        String apiURL = "http://localhost:8090/datosGenerales/c53b1dc6-58a1-4d2f-aa64-7d87828746a4";
 
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<DatosNuevaZelanda> requestEntity = new HttpEntity<>(nuevoRegistro, headers);
+
+        restTemplate.put(apiURL, requestEntity);
+
+        ResponseEntity<DatosNuevaZelanda> response = restTemplate.getForEntity(apiURL, DatosNuevaZelanda.class);
+        // Verificar el código de respuesta
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(nuevoRegistro.ID, response.getBody().ID);
+        assertEquals(nuevoRegistro.MsCode, response.getBody().MsCode);
+        assertEquals(nuevoRegistro.EstCode, response.getBody().EstCode);
+        assertEquals(nuevoRegistro.Estimate, response.getBody().Estimate);
+        assertEquals(nuevoRegistro.LowerCIB, response.getBody().LowerCIB);
+        assertEquals(nuevoRegistro.UpperCIB, response.getBody().UpperCIB);
+        assertEquals(nuevoRegistro.Flag, response.getBody().Flag);
+        assertEquals(nuevoRegistro.SE, response.getBody().SE);
+        assertEquals(nuevoRegistro.getYear(), response.getBody().getYear());
+    }
+
+    @Test
+    public void deleteRegistro(){
+        DatosNuevaZelanda registroVacio = new DatosNuevaZelanda();
+
+        String apiURL = "http://localhost:8090/datosGenerales/fcf56a66-2acf-4536-a418-328bdc2f45cd";
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(apiURL);
+
+        ResponseEntity<DatosNuevaZelanda> response = restTemplate.getForEntity(apiURL, DatosNuevaZelanda.class);
+
+        // Verificar el código de respuesta
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(registroVacio.ID, response.getBody());
+        assertEquals(registroVacio.MsCode, response.getBody());
+        assertEquals(registroVacio.EstCode, response.getBody());
+        assertEquals(registroVacio.Estimate, response.getBody());
+        assertEquals(registroVacio.LowerCIB, response.getBody());
+        assertEquals(registroVacio.UpperCIB, response.getBody());
+        assertEquals(registroVacio.Flag, response.getBody());
+        assertEquals(registroVacio.SE, response.getBody());
+        assertEquals(registroVacio.getYear(), response.getBody());
+
+    }
 }
