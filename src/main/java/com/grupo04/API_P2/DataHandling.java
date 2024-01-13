@@ -41,6 +41,21 @@ public class DataHandling {
         return registroEncontrado;
     }
 
+    ArrayList<DatosNuevaZelanda> getRegistroPorMsCode (String mscode){
+        DatosNuevaZelanda registroEncontrado = null;
+        JSONReader reader = new JSONReader();
+
+        ArrayList<DatosNuevaZelanda> registrosEncontrados = new ArrayList<>();
+
+        ArrayList<DatosNuevaZelanda> registros = reader.readDatosGenerales("./src/main/resources/cp-national-datafile.json");
+        for (DatosNuevaZelanda registro : registros){
+            if (registro.getMsCode().equals(mscode)){
+                registrosEncontrados.add(registro);
+            }
+        }
+        return registrosEncontrados;
+    }
+
     boolean deleteRegistro(String id) {
         JSONReader reader = new JSONReader();
         ArrayList<DatosNuevaZelanda> registros = reader.readDatosGenerales("./src/main/resources/cp-national-datafile.json");
@@ -75,7 +90,6 @@ public class DataHandling {
 
         return reader.writeJsonDatosGenerales("./src/main/resources/cp-national-datafile.json", registros);
     }
-
     boolean addRegistro(DatosNuevaZelanda nuevoRegistro) {
         JSONReader reader = new JSONReader();
         ArrayList<DatosNuevaZelanda> registros = reader.readDatosGenerales("./src/main/resources/cp-national-datafile.json");
@@ -87,7 +101,6 @@ public class DataHandling {
 
         return reader.writeJsonDatosGenerales("./src/main/resources/cp-national-datafile.json", registros);
     }
-
     List<String> getMsCodes() {
         JSONReader reader = new JSONReader();
         ArrayList<DatosNuevaZelanda> registros = reader.readDatosGenerales("src/main/resources/cp-national-datafile.json");
@@ -100,7 +113,18 @@ public class DataHandling {
                 distinctMsCodes.add(msCode);
             }
         }
-
         return distinctMsCodes;
     }
+    /*DatosAgrupados getPorMscode (String mscode){
+        DatosAgrupados registroEncontrado = null;
+        JSONReader reader = new JSONReader();
+
+        ArrayList<DatosAgrupados> registros = reader.readDatosAgrupados("./src/main/resources/MsCode_json.json");
+        for (DatosAgrupados registro : registros){
+            if (registro.getMsCode().equals(mscode)){
+                registroEncontrado = registro;
+            }
+        }
+        return registroEncontrado;
+    }*/
 }

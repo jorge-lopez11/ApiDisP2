@@ -67,5 +67,21 @@ public class JSONReader {
             return false;
         }
     }
+
+    public DatosAgrupados readDatosAgrupados(String fichero){
+        try {
+            //lee el fichero que le pasemos y lo carga en un reader
+            Reader reader = Files.newBufferedReader(Paths.get(fichero));
+            // convierte el array JSON a un arraylist de users
+            DatosAgrupados registros = new Gson().fromJson(reader, new TypeToken<DatosAgrupados>() {}.getType());
+            reader.close();// close reader
+            return registros;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null; //si no ha leido nada, devuelve vacio
+        }
+
+    }
 }
 
